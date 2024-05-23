@@ -3,10 +3,12 @@ class ExcepcionEdadInvalida(Exception):
         self.edad = edad
         self.mensaje = mensaje
         super().__init__(self.mensaje)
+        print("La edad introducida fue",edad)
 
 class ExcepcionNombre(Exception):
-    "Ocurre cuando no se encuentra el nombre en la lista"
-    pass
+    def __init__(self, mensaje="El nombre no se encontro en la lista"):
+        self.mensaje = mensaje
+        super().__init__(self.mensaje)
 
 
 class Controller:
@@ -19,15 +21,13 @@ class Controller:
             raise ExcepcionEdadInvalida(edad)
         else:
             return 1
-        
     
     
     def buscarNombre(self,nombre):
-        try:
-            if nombre in self.lista:
-                return 1
-            else:
-                raise ExcepcionNombre
-            
-        except ExcepcionNombre:
-            print("Error, el nombre no se encontró")
+        
+        if nombre in self.lista:
+            return 1
+        else:
+            raise ExcepcionNombre
+        
+        

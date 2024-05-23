@@ -4,8 +4,12 @@ controlador = Controller()
 
 def verificarEdad():
     edad = int(txtEdad.get())
+    validacion = 0
     
-    validacion = controlador.verificarEdadCont(edad)
+    try:
+        validacion = controlador.verificarEdadCont(edad)
+    except ExcepcionEdadInvalida as e:
+        print("Error", e)
     
     if validacion == 1:
         lblVerif.config(text="Eres Mayor de edad",bg="green")
@@ -15,8 +19,12 @@ def verificarEdad():
 
 def buscarUsuario():
     nombre = txtNombre.get()
+    busqueda = 0
     
-    busqueda = controlador.buscarNombre(nombre)
+    try:
+        busqueda = controlador.buscarNombre(nombre)
+    except ExcepcionNombre as e:
+        print("Error", e)
     
     if busqueda == 1:
         lblBusq.config(text="Usuario Encontrado",bg="green")
