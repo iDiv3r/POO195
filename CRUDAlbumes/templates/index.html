@@ -6,7 +6,26 @@
     <title>Formulario Albums</title>
 </head>
 <body>
+
+    <!-- Mensaje con Jinja -->
+    {%   with msg= get_flashed_messages()   %}
+
+        {%   if msg     %}
+
+            {%   for mensaje in msg %}
+
+                <h1>{{mensaje}}</h1>
+
+
+            {%   endfor     %}
+
+        {%   endif     %}
+
+    {%   endwith     %}
+
+ 
     <form action="/guardarAlbum" method="POST">
+
         <label for="">Titulo</label>
         <input type="text" name="txtTitulo"> 
 
@@ -20,7 +39,7 @@
         <br>
 
         <label for="">Año</label>
-        <input type="number" name="txtYear">
+        <input type="number" min="1000" max="3000" step="1" name="txtYear"/>
 
         <br>
         <br>

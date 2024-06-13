@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -12,6 +12,7 @@ app.config['MYSQL_PASSWORD'] = ''
 
 app.config['MYSQL_DB'] = 'bdFlask'
 
+app.secret_key= 'llave'
 
 mysql = MySQL(app)
 
@@ -23,26 +24,29 @@ def index():
 @app.route('/guardarAlbum',methods=['POST'])
 def guardarAlbum():
     if request.method == 'POST':
-        titulo = request.form['txtTitulo']
-        artista = request.form['txtArtista']
-        year = request.form['txtYear']
         
-        print(titulo, artista, year)
-        return 'Datos recibidos'
-
-
-@app.route('/operacion')
-def operacion():
-    return render_template('xd.html')
-
-@app.route('/suma',methods=['POST'])
-def suma():
-    if request.method == 'POST':
-        numero1 = int(request.form['num1'])
-        numero2 = int(request.form['num2'])
-        numero3 = numero1 + numero2
+        print (request.form)
         
-        return "El resultado es: " + str(numero3)
+        # Tomar los datos que vienen de POST
+        txtTitulo = request.form['txtTitulo']
+        txtArtista = request.form['txtArtista']
+        txtYear = request.form['txtYear']
+        
+        try: 
+            # Enviar datos a la Base de Datos 
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO albumes(titulo, artista, year ) values (%s,%s,%s)', (txtTitulo,txtArtista,txtYear))
+            mysql.connection.commit()
+            
+            
+            flash('Album guardado correctamente')
+                
+            return redirect(url_for('index'))
+        
+        except:
+            print('error')
+        
+
 
 
 if __name__ == '__main__':
