@@ -25,6 +25,22 @@ def index():
 def register():
     return render_template('registrosMedicos.html')
 
+@app.route('/consultarMedicos')
+def consultarMedicos():
+    try: 
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM medico')
+        datos = cursor.fetchall()
+            
+        return render_template('consultarMedicos.html', medicos = datos)
+    
+    except:
+        flash('Error en la consulta')
+            
+        return render_template('consultarMedicos.html')
+    
+
 @app.route('/guardarMedico',methods=['POST'])
 def guardarMedico():
     if request.method == 'POST':        
@@ -47,10 +63,10 @@ def guardarMedico():
             
             flash('El médico fue guardado correctamente')
                 
-            return redirect(url_for('register'))
+            return redirect(url_for('consultarMedicos'))
         
         except:
-            flash('Error al guardar usuario')
+            flash(' Revisa tus datos')
                 
             return redirect(url_for('register'))
         
