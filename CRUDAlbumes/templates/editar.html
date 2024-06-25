@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Albums</title>
+</head>
+<body>
+
+    <form action="/actualizarAlbum" method="POST">
+
+        <input hidden value=" {{album.0}}" name="txtId">
+
+        <label for="">Titulo</label>
+        <input type="text" name="txtTitulo" value="{{album.1}}"> 
+
+        <br>
+        <br>
+        
+        <label for="">Artista</label>
+        <input type="text" name="txtArtista"  value="{{album.2}}">
+
+        <br>
+        <br>
+
+        <label for="">Año</label>
+        <input type="number" min="1000" max="3000" step="1" name="txtYear"  value="{{album[3]}}"/>
+
+        <br>
+        <br>
+
+        <button type="submit">Guardar Cambios</button>
+
+    </form>
+
+
+</body>
+</html>
