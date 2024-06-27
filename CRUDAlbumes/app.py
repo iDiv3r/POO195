@@ -85,5 +85,23 @@ def actualizarAlbum():
         print(e)
 
 
+@app.route('/borrarAlbum',methods=['POST'])
+def borrarAlbum():
+    
+    txtid = request.form['txtIdAlbum']
+    
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('delete from albumes where id_album = %s',[txtid])
+        mysql.connection.commit()
+        
+        flash('Album eliminado correctamente')
+                
+        return redirect(url_for('index'))
+        
+    except Exception as e:
+        print(e)
+
+
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
