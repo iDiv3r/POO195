@@ -1,33 +1,34 @@
 {% extends 'app.html' %}
 
 {% block content %}
-
-    <h1>Editar Album</h1>
     
-    <form action="/actualizarAlbum" method="POST">
+    <h2 class="text-danger my-5 text-center display-4">Editar Album</h2>
 
-        <input hidden value=" {{album.0}}" name="txtId">
-
-        <label for="">Titulo</label>
-        <input type="text" name="txtTitulo" value="{{album.1}}"> 
-
-        <br>
-        <br>
+    <div class="d-flex justify-content-center">
+        <div class="container col-md-4 d-flex justify-content-center text-center">
+            <form action="/actualizarAlbum" method="POST">
         
-        <label for="">Artista</label>
-        <input type="text" name="txtArtista"  value="{{album.2}}">
+                <input hidden value=" {{album.0}}" name="txtId">
+                
+                <div class="mb-3">
+                    <label class="mb-1" for="">Titulo</label>
+                    <input type="text" name="txtTitulo" value="{{album.1}}" class="form-control text-center"> 
+                </div>
 
-        <br>
-        <br>
+                <div class="mb-3">
+                    <label class="mb-1" for="">Artista</label>
+                    <input type="text" name="txtArtista"  value="{{album.2}}" class="form-control text-center">
+                </div>
 
-        <label for="">Año</label>
-        <input type="number" min="1000" max="3000" step="1" name="txtYear"  value="{{album[3]}}"/>
-
-        <br>
-        <br>
-
-        <button type="submit">Guardar Cambios</button>
-
-    </form>
+                <div class="mb-3">
+                    <label class="mb-1" for="">Año</label>
+                    <input type="number" min="1000" max="3000" step="1" name="txtYear"  value="{{album[3]}}" class="form-control text-center"/>
+                </div>
+        
+                <button type="submit" class="btn btn-info w-100">Guardar Cambios</button>
+        
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

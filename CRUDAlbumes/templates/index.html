@@ -9,10 +9,18 @@
 
             {%   for mensaje in msg %}
 
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>{{mensaje}}</strong> 
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                </div> -->
+
+                <script>
+                    Swal.fire({
+                        title: "Correcto",
+                        text: "Album Guardado con éxito",
+                        icon: "success"
+                    });
+                </script>
 
             {%   endfor     %}
 
@@ -23,42 +31,38 @@
     <h2 class="text-danger my-5 text-center display-4">Gestión de albums</h2>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5 mb-5 ">
             <form action="/guardarAlbum" method="POST">
         
-                <label for="">Titulo</label>
-                <input type="text" name="txtTitulo"> 
-        
-                <br>
-                <br>
-                
-                <label for="">Artista</label>
-                <input type="text" name="txtArtista">
-        
-                <br>
-                <br>
-        
-                <label for="">Año</label>
-                <input type="number" min="1000" max="3000" step="1" name="txtYear"/>
-        
-                <br>
-                <br>
-        
-                <button type="submit">Guardar Album</button>
+                <div class="container px-5">
+                    <div class="mb-3">
+                        <input type="text" name="txtTitulo" class="form-control" placeholder="Título"> 
+                    </div>
+    
+                    <div class="mb-3">
+                        <input type="text" name="txtArtista" class="form-control" placeholder="Artista">
+                    </div>
+    
+                    <div class="mb-3">
+                        <input type="number" min="1000" max="3000" step="1" name="txtYear" class="form-control" placeholder="Año"/>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-outline-success">Guardar Album</button>
+                </div>
             </form>
         </div>
-        <div class="col-md-7">
-            <table>
-                <thead> 
+
+        <div class="container col-md-5">
+            <table class="table align-middle ">
+                <thead>
                     <tr>
-                        <td> Id </td>
-                        <td > Album </td>
-                        <td> Artista </td>
-                        <td> Año </td>
-                        <td> Operaciones </td>
+                        <th scope="col">Id</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Artista</th>
+                        <th scope="col">Año</th>
+                        <th scope="col">Operaciones</th>
                     </tr>
                 </thead>
-        
                 <tbody>
                     {%for album in albums%}
                         <tr>
@@ -66,9 +70,10 @@
                             <td> {{ album.1}} </td>
                             <td> {{ album.2}} </td>
                             <td> {{ album.3}} </td>
-                            <td> <a href="/editarAlbum/{{album.0}}">Editar</a> </td>
                             <td> 
-                                <a  href="" class="text-primary" data-bs-toggle="modal" data-bs-target="#{{album[0]}}">
+                                <a href="/editarAlbum/{{album.0}}" class="btn btn-info">Editar</a>
+                            
+                                <a  href="" class="text-white btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{album[0]}}">
                                     Borrar
                                 </a>
                             </td>
@@ -96,7 +101,7 @@
                             </div>
         
                         </tr>
-        
+            
                     {%endfor%}
                 </tbody>
             </table>
