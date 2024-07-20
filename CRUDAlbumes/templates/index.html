@@ -32,7 +32,7 @@
 
     <div class="row">
         <div class="col-md-5 mb-5 ">
-            <form action="/guardarAlbum" method="POST">
+            <form action="/guardarAlbum" method="POST" enctype="multipart/form-data">
         
                 <div class="container px-5">
                     <div class="mb-3">
@@ -46,17 +46,22 @@
                     <div class="mb-3">
                         <input type="number" min="1000" max="3000" step="1" name="txtYear" class="form-control" placeholder="Año"/>
                     </div>
+
+                    <div class="mb-3">
+                        <input type="file" name="Imagen" class="form-control" placeholder="Imagen" accept="image/png, image/jpeg" required />
+                    </div>
                     
                     <button type="submit" class="btn btn-outline-success">Guardar Album</button>
                 </div>
             </form>
         </div>
 
-        <div class="container col-md-5">
+        <div class="container col-md-6">
             <table class="table align-middle ">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Album</th>
                         <th scope="col">Artista</th>
                         <th scope="col">Año</th>
@@ -67,6 +72,9 @@
                     {%for album in albums%}
                         <tr>
                             <td> {{ album.0}} </td>
+                            <td> 
+                                <img src="{{ url_for('static', filename='images/' + album[4]) }}" alt="" style="height: auto; width: 4vh">
+                            </td>
                             <td> {{ album.1}} </td>
                             <td> {{ album.2}} </td>
                             <td> {{ album.3}} </td>

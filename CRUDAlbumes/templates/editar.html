@@ -6,7 +6,7 @@
 
     <div class="d-flex justify-content-center">
         <div class="container col-md-4 d-flex justify-content-center text-center">
-            <form action="/actualizarAlbum" method="POST">
+            <form action="/actualizarAlbum" method="POST" enctype="multipart/form-data">
         
                 <input hidden value=" {{album.0}}" name="txtId">
                 
@@ -23,6 +23,17 @@
                 <div class="mb-3">
                     <label class="mb-1" for="">Año</label>
                     <input type="number" min="1000" max="3000" step="1" name="txtYear"  value="{{album[3]}}" class="form-control text-center"/>
+                </div>
+
+                <div class="mb-3 row flex justify-content-center">
+                    <label class="mb-1" for="">Imagen</label>
+                    
+                    <img src="{{ url_for('static', filename='images/' + album[4]) }}" alt="" style="height: auto; width: 25vh" class="my-3">
+
+                    <input type="text" name="imgAnterior" value="{{album[4]}}" hidden>
+                    
+                    <input type="file" name="Imagen" id="formFile" class="form-control" placeholder="Imagen" accept="image/png, image/jpeg" required />
+                    
                 </div>
         
                 <button type="submit" class="btn btn-info w-100">Guardar Cambios</button>
